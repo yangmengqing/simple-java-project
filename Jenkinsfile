@@ -19,9 +19,6 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml' 
                 }
-                cleanup {
-                    sh 'mvn clean'
-                }
             }
         }
         stage('Deploy') {
