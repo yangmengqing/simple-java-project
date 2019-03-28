@@ -1,5 +1,6 @@
 pipeline {
-    agent {
+    agent any
+    /*agent {
         docker {
             image 'maven:3-alpine'
             args '-v $HOME/.m2:/root/.m2'
@@ -25,7 +26,7 @@ pipeline {
             steps {
                 sh 'cp target/*.war $HOME/build'
             }
-        }
+        }*/
         stage('Deploy to Production') {
             agent {
                 docker { image 'tomcat' }
