@@ -27,6 +27,7 @@ pipeline {
                 sh 'cp target/*.war $HOME/build'
             }
         }*/
+    stages {
         stage('Deploy to Production') {
             agent {
                 docker { image 'tomcat' }
@@ -35,5 +36,6 @@ pipeline {
                 sh 'pwd'
             }
         }
+    }
     }
 }
