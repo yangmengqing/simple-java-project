@@ -1,13 +1,13 @@
 pipeline {
     agent any
-    /*agent {
+        /*agent {
         docker {
             image 'maven:3-alpine'
             args '-v $HOME/.m2:/root/.m2'
         }
-    }
+    }*/
     stages {
-        stage('Build') {
+     /*    stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
@@ -26,8 +26,7 @@ pipeline {
             steps {
                 sh 'cp target/*.war $HOME/build'
             }
-        }*/
-    stages {
+        } */
         stage('Deploy to Production') {
             agent {
                 docker { image 'tomcat' }
@@ -36,6 +35,5 @@ pipeline {
                 sh 'pwd'
             }
         }
-    }
     }
 }
