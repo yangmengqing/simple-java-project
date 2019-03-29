@@ -3,8 +3,10 @@ pipeline {
     stages {
        stage('Build') {
             steps {
-                mvnHome = tool 'Maven'
-                sh "${mvnHome}/bin/mvn clean test"
+                script {
+                    def mvnHome = tool 'Maven'
+                    sh "${mvnHome}/bin/mvn clean test"
+                }
             }
             post {
                 always {
