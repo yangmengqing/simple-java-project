@@ -2,10 +2,12 @@ pipeline {
     agent any
     stages {
        stage('Build') {
-            docker {
-                image 'maven:3-alpine'
-                args '-v $HOME/.m2:/root/.m2'
-            }
+           agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+           }
             steps {
                 script {
                     def mvnHome = tool 'Maven'
@@ -21,11 +23,9 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 sh 'pwd'
-                script {
-                    sh 'docker build -t nginx -f nginx/Dockerfile .'
+                sh 'docker build -t nginx -f nginx/Dockerfile .'
                     //def testImage = docker.build('test-image', 'nginx')
                     //testImage.push()
-                }
             }
         }
     }
