@@ -9,10 +9,7 @@ pipeline {
                 }
            }
             steps {
-                script {
-                    def mvnHome = tool 'Maven'
-                    sh "${mvnHome}/bin/mvn clean test"
-                }
+                sh "mvn clean test"
             }
             post {
                 always {
