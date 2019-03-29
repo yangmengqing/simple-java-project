@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn package test'
+                sh 'mvn clean test'
             }
             post {
                 always {
@@ -19,10 +19,10 @@ pipeline {
         } 
         stage('Deploy to Production') {
             steps {
-                script {
-                    docker.image('tomcat').inside {
-                        sh 'ps aux'
-                    }
+                scripts {
+                    def testImage = docker.build('test-image', 'nginx/Dockerfile')
+                    testImage.push()
+                }
                 }
             }
         }
