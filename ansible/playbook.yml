@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Setup Jenkins
+    shell: docker-compose up -d
+    args:
+      chdir: ../jenkins
+    tags: jenkins_setup
+
+  - name: Create Jenkins Job
+    shell: jenkins-jobs --flush-cache --conf jenkins_job.ini update job.yml 
+    args:
+      chdir: ../jenkins
+    tags: create_jenkins_job
+
+  - name: Create Production Swarm Cluster
+    shell: create_cluster.sh
+    args:
+      chdir: ../deploy
+    tags: create_cluster
+  
+  - name: Deploy to Production
+    shell: docker-machine scp docker-compose.yml manager1:~/ && docker-machine ssh manager1 "docker stack deploy -c docker-compose.yml web"
+    args:
+      chdir: ../deploy
+    tags: deploy_service
+

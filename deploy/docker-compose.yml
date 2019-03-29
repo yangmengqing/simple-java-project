@@ -1,0 +1,17 @@
+version: '3'
+
+services: 
+  nginx:
+    image: mengqingyang/nginx
+    ports: 
+      - 80:80
+    deploy:
+      replicas: 2
+    depends_on: 
+      - tomcat
+  tomcat:
+    image: mengqingyang/tomcat
+    deploy:
+      replicas: 3
+    ports:
+      - 8080
