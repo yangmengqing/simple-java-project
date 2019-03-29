@@ -6,6 +6,6 @@ RUN mkdir -p /www/static
 
 COPY ./src/static/ /www/static
 
-RUN cd /www/static && unzip *.zip && rm *.zip
+RUN cd /www/static & unzip *.zip && rm *.zip
 
 COPY ./nginx/default.conf /etc/nginx/conf.d/
