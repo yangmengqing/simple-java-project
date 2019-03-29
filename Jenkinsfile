@@ -20,16 +20,16 @@ pipeline {
                 }
             }
         } 
-        stage('Deploy to Production') {
+        stage('Publish to DockerHub') {
             steps {
-                sh 'pwd'
                 sh 'docker build -t nginx -f nginx/Dockerfile .'
                 sh 'docker tag nginx mengqingyang/nginx'
+                sh 'docker build -t tomcat -f tomcat/Dockerfile .'
+                sh 'docker tag tomcat mengqingyang/tomcat'
                 withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
                     sh 'docker push mengqingyang/nginx'
+                    sh 'docker push mengqingyang/tomcat'
                 }
-                    //def testImage = docker.build('test-image', 'nginx')
-                    //testImage.push()
             }
         }
     }
