@@ -29,7 +29,7 @@ pipeline {
     //     }
         stage('Deploy to Stack') {
             agent {
-                docker { image 'ansible/ansible'}
+                docker { image 'ansible/ubuntu14.04-ansible:stable'}
             }
             steps {
                 sh 'ansible --version'
