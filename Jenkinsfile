@@ -32,7 +32,7 @@ pipeline {
                 docker { image 'ansible/ubuntu14.04-ansible:stable'}
             }
             steps {
-                sh 'ansible --version'
+                sh 'ansible-playbook playbook.yml --tags=deploy_service'
             }
         }
     }
