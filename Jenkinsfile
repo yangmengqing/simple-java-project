@@ -19,10 +19,9 @@ pipeline {
         } 
         stage('Deploy to Production') {
             steps {
-                scripts {
+                script {
                     def testImage = docker.build('test-image', 'nginx/Dockerfile')
                     testImage.push()
-                }
                 }
             }
         }
