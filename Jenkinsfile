@@ -29,10 +29,10 @@ pipeline {
     //     }
         stage('Deploy to Stack') {
             agent {
-                docker { image: 'ansible'}
+                docker { image 'ansible'}
             }
             steps {
-                ansible --version
+                sh 'ansible --version'
             }
         }
     }
