@@ -24,7 +24,8 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'docker build -t nginx -f nginx/Dockerfile .'
-                
+                sh 'docker tag nginx mengqingyang/nginx'
+                sh 'docker push mengqingyang/nginx'
                     //def testImage = docker.build('test-image', 'nginx')
                     //testImage.push()
             }
