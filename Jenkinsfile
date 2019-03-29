@@ -19,7 +19,9 @@ pipeline {
         } 
         stage('Deploy to Production') {
             steps {
+                sh 'pwd'
                 script {
+                    sh 'pwd'
                     def testImage = docker.build('test-image', 'tomcat')
                     testImage.push()
                 }
